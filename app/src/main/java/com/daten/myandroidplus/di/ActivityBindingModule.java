@@ -1,6 +1,7 @@
 package com.daten.myandroidplus.di;
 
 import com.daten.myandroidplus.ui.activity.LoginActivity;
+import com.daten.myandroidplus.ui.activity.MainActivity;
 import com.daten.myandroidplus.ui.activity.RegisterActivity;
 import com.daten.myandroidplus.ui.activity.SplashActivity;
 
@@ -21,4 +22,7 @@ public abstract class ActivityBindingModule {
     @ContributesAndroidInjector
     abstract RegisterActivity registerActivity();
 
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = MainModule.class)
+    abstract MainActivity mainActivity();
 }

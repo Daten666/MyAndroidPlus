@@ -26,7 +26,6 @@ public abstract class BaseMainFragment extends BaseFragment {
     @Override
     protected void init() {
         super.init();
-        super.init();
         mViewPager.setAdapter(getPagerAdapter());
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(getTabScrollMode());
