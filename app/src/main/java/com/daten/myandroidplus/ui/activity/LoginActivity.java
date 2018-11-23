@@ -23,7 +23,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
-
     @BindView(R.id.user_name)
     EditText mUserName;
     @BindView(R.id.password)
@@ -58,6 +57,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
         });
         PermissionUtils.checkPermissions(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mLoginPresenter.takeView(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLoginPresenter.dropView();
     }
 
     @OnClick({R.id.register, R.id.login})
@@ -110,6 +121,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         return true;
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            mUserName.setText(data.getStringExtra(Constant.EXTRA_USER_NAME));
+            mPassword.setText(data.getStringExtra(Constant.EXTRA_PASSWORD));
+        }
+    }
+
+
     @Override
     public void onLoginSuccess() {
         mProgressLayout.setVisibility(View.GONE);
@@ -121,6 +142,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void onLoginFailed() {
         mProgressLayout.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -133,13 +155,5 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void onUserNameDoesNotExist() {
         mProgressLayout.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.user_name_does_not_exist), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            mUserName.setText(data.getStringExtra(Constant.EXTRA_USER_NAME));
-            mPassword.setText(data.getStringExtra(Constant.EXTRA_PASSWORD));
-        }
     }
 }

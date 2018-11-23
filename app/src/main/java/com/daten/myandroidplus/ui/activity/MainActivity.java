@@ -1,12 +1,15 @@
 package com.daten.myandroidplus.ui.activity;
 
+import android.animation.ObjectAnimator;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
 import com.daten.myandroidplus.R;
+import com.daten.myandroidplus.event.ScrollEvent;
 import com.daten.myandroidplus.ui.fragment.ArticleFragment;
 import com.daten.myandroidplus.ui.fragment.HomeFragment;
 import com.daten.myandroidplus.ui.fragment.MeFragment;
@@ -42,7 +45,7 @@ public class MainActivity extends BaseActivity {
         //监听底部导航条切换事件
         mBottomNavigation.setOnNavigationItemSelectedListener(mOnOnNavigationItemSelectedListener);
         mBottomNavigation.setSelectedItemId(R.id.main_home);
-        //EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
 
     }
 
@@ -76,6 +79,32 @@ public class MainActivity extends BaseActivity {
         }
         fragmentTransaction.commit();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onScrollChange(ScrollEvent scrollEvent) {
+        if (scrollEvent.getDirection() == ScrollEvent.Direction.UP) {
+            hideNavigationView();
+        } else {
+            showNavigationView();
+        }
+    }
+
+    private void showNavigationView() {
+        animationNavigationView(mBottomNavigation.getHeight(), 0);
+    }
+
+    private void hideNavigationView() {
+        animationNavigationView(0, mBottomNavigation.getHeight());
+    }
+
+    private void animationNavigationView(int from, int to) {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mBottomNavigation, "translationY",
+                from, to);
+        objectAnimator.setDuration(500);
+        objectAnimator.setInterpolator(new LinearInterpolator());
+        objectAnimator.start();
+    }
+
 
     @Override
     protected void onDestroy() {

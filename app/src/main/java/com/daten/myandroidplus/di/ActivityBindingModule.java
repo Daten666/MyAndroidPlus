@@ -1,5 +1,6 @@
 package com.daten.myandroidplus.di;
 
+import com.daten.myandroidplus.ui.activity.AddQuestionActivity;
 import com.daten.myandroidplus.ui.activity.LoginActivity;
 import com.daten.myandroidplus.ui.activity.MainActivity;
 import com.daten.myandroidplus.ui.activity.RegisterActivity;
@@ -25,4 +26,8 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = MainModule.class)
     abstract MainActivity mainActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector
+    abstract AddQuestionActivity addQuestionActivity();
 }

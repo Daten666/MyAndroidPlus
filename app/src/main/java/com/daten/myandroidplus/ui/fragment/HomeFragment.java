@@ -1,5 +1,6 @@
 package com.daten.myandroidplus.ui.fragment;
 
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import com.daten.myandroidplus.R;
 import com.daten.myandroidplus.adapter.HomePagerAdapter;
 import com.daten.myandroidplus.di.ActivityScoped;
+import com.daten.myandroidplus.ui.activity.AddQuestionActivity;
 
 import javax.inject.Inject;
 
@@ -16,9 +18,9 @@ public class HomeFragment extends BaseMainFragment {
     private Toolbar.OnMenuItemClickListener mOnMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-//            Intent intent = new Intent(getContext(), AddQuestionActivity.class);
-//            startActivity(intent);
-            return true;
+        Intent intent = new Intent(getContext(), AddQuestionActivity.class);
+        startActivity(intent);
+        return true;
         }
     };
 

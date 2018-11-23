@@ -9,7 +9,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
 @Component(modules = {ActivityBindingModule.class,
-        AndroidSupportInjectionModule.class})
+        AndroidSupportInjectionModule.class,
+        DataRepositoryModule.class})
 public interface AppComponent extends AndroidInjector<DaggerApplication> {
     @Override
     void inject(DaggerApplication instance);
