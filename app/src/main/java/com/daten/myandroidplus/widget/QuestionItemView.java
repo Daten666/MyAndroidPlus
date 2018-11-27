@@ -1,6 +1,7 @@
 package com.daten.myandroidplus.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.daten.myandroidplus.R;
+import com.daten.myandroidplus.app.Constant;
 import com.daten.myandroidplus.app.GlideApp;
 import com.daten.myandroidplus.data.model.Question;
+import com.daten.myandroidplus.ui.activity.ProfileActivity;
 import com.daten.myandroidplus.utils.DateUtils;
 
 import butterknife.BindView;
@@ -80,10 +83,10 @@ public class QuestionItemView extends CardView {
         switch (view.getId()) {
             case R.id.avatar:
             case R.id.user_name:
-//                Intent intent = new Intent(getContext(), ProfileActivity.class);
-//                intent.putExtra(Constant.EXTRA_USER_ID, mQuestion.getUser().getObjectId());
-//                getContext().startActivity(intent);
-//                break;
+                Intent intent = new Intent(getContext(), ProfileActivity.class);
+                intent.putExtra(Constant.EXTRA_USER_ID, mQuestion.getUser().getObjectId());
+                getContext().startActivity(intent);
+                break;
             case R.id.question_item:
                 navigateToQuestionDetail();
                 break;

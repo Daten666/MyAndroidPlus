@@ -43,6 +43,10 @@
 
         <activity android:name=".ui.activity.AddQuestionActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.activity.ProfileActivity"
+            android:theme="@style/TransparentStatusBarTheme"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
